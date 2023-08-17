@@ -44,8 +44,11 @@ class _Ui_of_GameState extends State<Ui_of_Game> {
     // Check the condition and show the AlertDialog if the value is 10.
 
     // print("hello ");
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showAlertDialog(context);
+
+      // setState(() {});
     });
   }
 
@@ -233,7 +236,7 @@ class _Ui_of_GameState extends State<Ui_of_Game> {
         logicer <= 8 &&
         ConatColor[i] != Colors.blue &&
         ConatColor[i] != Colors.red) {
-      trunplayer = "Player 2";
+      player2Name.isEmpty ? trunplayer = "Player 2" : trunplayer = player2Name;
       colorss = "Blue";
       ConatColor[i] = Colors.red;
       winnderDec = player1(row, column);
@@ -250,7 +253,7 @@ class _Ui_of_GameState extends State<Ui_of_Game> {
     } else if (logicer <= 8 &&
         ConatColor[i] != Colors.blue &&
         ConatColor[i] != Colors.red) {
-      trunplayer = "Player 1";
+      player1Name.isEmpty ? trunplayer = "Player 1" : trunplayer = player1Name;
       colorss = "Red";
       ConatColor[i] = Colors.blue;
       winnderDec = player2(row, column);
@@ -306,6 +309,8 @@ class _Ui_of_GameState extends State<Ui_of_Game> {
                 decoration: const InputDecoration(hintText: '1st Player Name'),
                 onChanged: (e) {
                   player1Name = name1.text;
+
+                  print('$trunplayer');
                 },
               ),
               TextField(
@@ -322,7 +327,10 @@ class _Ui_of_GameState extends State<Ui_of_Game> {
               onPressed: () {
                 // name1.text = "";
                 // Do something when the user presses the 'OK' button.
-
+                player1Name.isEmpty
+                    ? trunplayer = "Player 1"
+                    : trunplayer = player1Name;
+                setState(() {});
                 Navigator.of(context).pop(); // Close the alert dialog.
               },
               child: Text('OK'),
